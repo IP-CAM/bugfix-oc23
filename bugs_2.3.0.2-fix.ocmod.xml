@@ -1,0 +1,83 @@
+<modification>
+	<name>Bugs 2.3.0.2 fix</name>
+	<version>1.0</version>
+	<author>peku</author>
+	<code>qd3daADw98p</code>
+<file path="admin/model/catalog/information.php">
+    <operation> 
+        <search><![CDATA[isset($data['keyword'])]]></search>
+        <add position="replace"><![CDATA[$data['keyword']]]></add>
+    </operation>
+</file>
+<file path="admin/controller/common/column_left.php">
+    <operation> 
+        <search><![CDATA[$data['lastname'] = $user_info['lastname'];]]></search>
+        <add position="after"><![CDATA[              $data['username']  = $user_info['username'];]]></add>
+    </operation>
+    <operation> 
+        <search><![CDATA[$data['lastname'] = '';]]></search>
+        <add position="after"><![CDATA[              $data['username']  = '';]]></add>
+    </operation>
+</file>
+<file path="admin/controller/extension/extension/dashboard.php">
+    <operation> 
+        <search><![CDATA['dashboard_' . $this->request->get['extension']]]></search>
+        <add position="replace"><![CDATA[$this->request->get['extension']]]></add>
+    </operation>
+</file>
+<file path="admin/model/localisation/language.php">
+    <operation> 
+        <search><![CDATA[banner_image_description]]></search>
+        <add position="replace"><![CDATA[banner_image]]></add>
+    </operation>
+</file>
+<file path="admin/view/template/setting/setting.tpl">
+    <operation> 
+        <search position="replace"><![CDATA[config_mail_alert_email]]></search>
+        <add><![CDATA[config_alert_email]]></add>
+    </operation>
+</file>
+<file path="catalog/model/tool/image.php">
+    <operation> 
+        <search><![CDATA[!= DIR_IMAGE]]></search>
+        <add position="replace"><![CDATA[!= str_replace('\\', '/', DIR_IMAGE)]]></add>
+    </operation>
+</file>
+<file path="admin/model/tool/image.php">
+    <operation> 
+        <search><![CDATA[!= DIR_IMAGE]]></search>
+        <add position="replace"><![CDATA[!= str_replace('\\', '/', DIR_IMAGE)]]></add>
+    </operation>
+</file>
+<file path="catalog/model/checkout/order.php">
+    <operation> 
+        <search><![CDATA[$this->{'model_fraud_' . $extension['code']}->check($order_info)]]></search>
+        <add position="replace"><![CDATA[$this->{'model_extension_fraud_' . $extension['code']}->check($order_info)]]></add>
+    </operation>
+</file>
+<file path="catalog/controller/information/contact.php">
+    <operation> 
+        <search><![CDATA[$mail->setFrom($this->request->post['email']);]]></search>
+        <add position="replace"><![CDATA[$mail->setFrom($this->config->get('config_email'));
+			$mail->setReplyTo($this->request->post['email']);]]></add>
+    </operation>
+</file>
+<file path="catalog/controller/checkout/payment_method.php">
+    <operation> 
+        <search><![CDATA[$this->session->data['comment'] = strip_tags($this->request->post['comment']);]]></search>
+        <add position="replace"><![CDATA[$this->session->data['comment'] = '';
+        if (!empty($this->request->post['comment'])) {
+               $this->session->data['comment'] = strip_tags($this->request->post['comment']);
+        }]]></add>
+    </operation>
+</file>
+<file path="catalog/controller/checkout/shipping_method.php">
+    <operation> 
+        <search><![CDATA[$this->session->data['comment'] = strip_tags($this->request->post['comment']);]]></search>
+        <add position="replace"><![CDATA[$this->session->data['comment'] = '';
+        if (!empty($this->request->post['comment'])) {
+               $this->session->data['comment'] = strip_tags($this->request->post['comment']);
+        }]]></add>
+    </operation>
+</file>
+</modification>
