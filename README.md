@@ -1,2 +1,1 @@
-# bugfix-oc23
-Sửa lỗi OC23 
+# bugfix-oc v.2.3.x.x
